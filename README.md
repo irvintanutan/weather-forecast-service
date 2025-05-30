@@ -78,7 +78,7 @@ No request body is required. The city name is passed as a path parameter.
 
 #### Example Request
 ```bash
-curl -X GET http://localhost:8080/v1/weather/melbourne
+curl -X GET http://localhost:8080/v1/weather?city=melbourne
 ```
 
 #### Response
