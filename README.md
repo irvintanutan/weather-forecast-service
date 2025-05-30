@@ -1,4 +1,3 @@
-```markdown
 # Weather Forecast Service
 
 ## Description
@@ -34,10 +33,8 @@ The application requires the following environment variables to be set for API k
 ## How to Compile and Run
 
 ### Step 1: Clone the Repository
-```bash
 git clone https://github.com/your-username/weather-forecast-service.git
 cd weather-forecast-service
-```
 
 ### Step 2: Set Environment Variables
 Set the required environment variables in your system. For example:
@@ -72,7 +69,7 @@ mvn test
 
 ## API Instructions
 
-### Endpoint: `/api/weather/{city}`
+### Endpoint: `/v1/weather/{city}`
 **Method:** `GET`  
 **Description:** Fetches the weather forecast for the specified city.
 
@@ -81,7 +78,7 @@ No request body is required. The city name is passed as a path parameter.
 
 #### Example Request
 ```bash
-curl -X GET http://localhost:8080/api/weather/melbourne
+curl -X GET http://localhost:8080/v1/weather/melbourne
 ```
 
 #### Response
