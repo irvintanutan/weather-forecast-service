@@ -1,3 +1,4 @@
+```markdown
 # Weather Forecast Service
 
 ## Description
@@ -69,9 +70,41 @@ Access the application endpoints (if implemented) or test the functionality usin
 mvn test
 ```
 
-## Notes
-- Ensure the environment variables are correctly set if you want to override the default values.
-- The application uses `RestTemplate` to interact with external APIs. Make sure the APIs are accessible from your network.
+## API Instructions
+
+### Endpoint: `/api/weather/{city}`
+**Method:** `GET`  
+**Description:** Fetches the weather forecast for the specified city.
+
+#### Request Payload
+No request body is required. The city name is passed as a path parameter.
+
+#### Example Request
+```bash
+curl -X GET http://localhost:8080/api/weather/melbourne
+```
+
+#### Response
+The API returns a JSON object containing the weather data for the specified city.
+
+#### Example Response
+```json
+{
+  "wind_speed": "10.0",
+  "temperature_degrees": "22.0"
+}
+```
+
+#### Response Fields
+| Field                | Type    | Description                          |
+|----------------------|---------|--------------------------------------|
+| `wind_speed`         | String  | The wind speed in the city (km/h).   |
+| `temperature_degrees`| String  | The temperature in the city (°C).    |
+
+### Notes
+- If the primary API fails, the application will fallback to the secondary API.
+- If both APIs fail, default values (`wind_speed: "0.0"`, `temperature_degrees: "0.0"`) will be returned.
 
 ## License
 This project is licensed under the MIT License.
+```
