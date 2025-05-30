@@ -2,8 +2,6 @@ package com.example.weatherforecast.service;
 
 import com.example.weatherforecast.dto.Weather;
 
-import java.util.Map;
-
 public interface WeatherForecastService {
     /**
      * Retrieves the weather forecast for a given city.

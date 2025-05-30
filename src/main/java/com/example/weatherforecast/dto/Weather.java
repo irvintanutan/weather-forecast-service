@@ -1,9 +1,21 @@
 package com.example.weatherforecast.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-public record Weather(
-        @JsonProperty("wind_speed") double windSpeed,
-        @JsonProperty("temperature_degrees") double temperatureDegrees
-) {
+@Data
+public class Weather {
+    @JsonProperty("wind_speed")
+    private String windSpeed;
+
+    @JsonProperty("temperature_degrees")
+    private String temperatureDegrees;
+
+    public Weather() {
+    }
+
+    public Weather(String windSpeed, String temperatureDegrees) {
+        this.windSpeed = windSpeed;
+        this.temperatureDegrees = temperatureDegrees;
+    }
 }

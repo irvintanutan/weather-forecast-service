@@ -12,51 +12,51 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class WeatherForecastServiceImpl implements WeatherForecastService {
 
+    private final ConcurrentHashMap<String, Map<String, Object>> cache = new ConcurrentHashMap<>();
+    private long lastCacheTime = 0;
+    private static final String WIND_SPEED = "wind_speed";
+    private static final String TEMPERATURE_DEGREES = "temperature_degrees";
+
+
     @Autowired
     private WeatherStackClient weatherStackClient;
 
     @Autowired
     private OpenWeatherMapClient openWeatherMapClient;
 
-    private final ConcurrentHashMap<String, Map<String, Object>> cache = new ConcurrentHashMap<>();
-    private final long CACHE_EXPIRY = 3000; // 3 seconds
-    private long lastCacheTime = 0;
-
     @Override
     public Weather getWeather(String city) {
         long currentTime = System.currentTimeMillis();
-        if (currentTime - lastCacheTime < CACHE_EXPIRY && cache.containsKey(city)) {
+        boolean isCacheValid = (currentTime - lastCacheTime < 3000) && cache.containsKey(city);
+
+        if (isCacheValid) {
             Map<String, Object> cachedData = cache.get(city);
-            return new Weather(
-                    (double) cachedData.get("wind_speed"),
-                    (double) cachedData.get("temperature_degrees")
-            );
+            return createWeatherFromData(cachedData);
         }
 
+        Map<String, Object> weatherData = fetchWeatherData(city);
+        cache.put(city, weatherData);
+        lastCacheTime = currentTime;
+
+        return createWeatherFromData(weatherData);
+    }
+
+    private Map<String, Object> fetchWeatherData(String city) {
         try {
-            Map<String, Object> weatherData = weatherStackClient.getWeather(city);
-            cache.put(city, weatherData);
-            lastCacheTime = currentTime;
-            return new Weather(
-                    (double) weatherData.get("wind_speed"),
-                    (double) weatherData.get("temperature_degrees")
-            );
+            return weatherStackClient.getWeather(city);
         } catch (Exception e) {
             try {
-                Map<String, Object> weatherData = openWeatherMapClient.getWeather(city);
-                cache.put(city, weatherData);
-                lastCacheTime = currentTime;
-                return new Weather(
-                        (double) weatherData.get("wind_speed"),
-                        (double) weatherData.get("temperature_degrees")
-                );
+                return openWeatherMapClient.getWeather(city);
             } catch (Exception ex) {
-                Map<String, Object> cachedData = cache.getOrDefault(city, Map.of("wind_speed", 0.0, "temperature_degrees", 0.0));
-                return new Weather(
-                        (double) cachedData.get("wind_speed"),
-                        (double) cachedData.get("temperature_degrees")
-                );
+                return cache.getOrDefault(city, Map.of(WIND_SPEED, 0.0, TEMPERATURE_DEGREES, 0.0));
             }
         }
+    }
+
+    private Weather createWeatherFromData(Map<String, Object> data) {
+        return new Weather(
+                data.get(WIND_SPEED).toString(),
+                data.get(TEMPERATURE_DEGREES).toString()
+        );
     }
 }
