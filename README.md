@@ -69,7 +69,7 @@ mvn test
 
 ## API Instructions
 
-### Endpoint: `/v1/weather/{city}`
+### Endpoint: `/v1/weather?city={city}`
 **Method:** `GET`  
 **Description:** Fetches the weather forecast for the specified city.
 
