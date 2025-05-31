@@ -1,7 +1,7 @@
-package com.example.weatherforecast.controller;
+package com.weatherforecast.controller;
 
-import com.example.weatherforecast.dto.Weather;
-import com.example.weatherforecast.service.WeatherForecastService;
+import com.weatherforecast.dto.Weather;
+import com.weatherforecast.service.WeatherForecastService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

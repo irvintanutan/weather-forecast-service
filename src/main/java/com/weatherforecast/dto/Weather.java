@@ -1,4 +1,4 @@
-package com.example.weatherforecast.dto;
+package com.weatherforecast.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

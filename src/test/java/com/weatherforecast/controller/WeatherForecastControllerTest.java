@@ -1,7 +1,7 @@
-package com.example.weatherforecast.controller;
+package com.weatherforecast.controller;
 
-import com.example.weatherforecast.dto.Weather;
-import com.example.weatherforecast.service.WeatherForecastService;
+import com.weatherforecast.dto.Weather;
+import com.weatherforecast.service.WeatherForecastService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,6 +1,6 @@
-package com.example.weatherforecast.service;
+package com.weatherforecast.service;
 
-import com.example.weatherforecast.dto.Weather;
+import com.weatherforecast.dto.Weather;
 
 public interface WeatherForecastService {
     /**

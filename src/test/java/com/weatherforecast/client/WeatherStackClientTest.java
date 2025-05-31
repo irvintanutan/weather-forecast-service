@@ -1,4 +1,4 @@
-package com.example.weatherforecast.client;
+package com.weatherforecast.client;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

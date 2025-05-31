@@ -1,8 +1,8 @@
-package com.example.weatherforecast.service;
+package com.weatherforecast.service;
 
-import com.example.weatherforecast.client.WeatherStackClient;
-import com.example.weatherforecast.client.OpenWeatherMapClient;
-import com.example.weatherforecast.dto.Weather;
+import com.weatherforecast.client.WeatherStackClient;
+import com.weatherforecast.client.OpenWeatherMapClient;
+import com.weatherforecast.dto.Weather;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
